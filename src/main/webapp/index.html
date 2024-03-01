@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Login</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+<!-- Login 4 - Bootstrap Brain Component -->
+<section class="p-3 p-md-4 p-xl-5">
+  <div class="container">
+    <div class="card border-light-subtle shadow-sm">
+      <div class="row g-0">
+        <div class="col-12 col-md-6">
+          <img class="img-fluid rounded-start w-100 h-100 object-fit-cover" src="img/logo-iscae.png" alt="BootstrapBrain Logo">
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="card-body p-3 p-md-4 p-xl-5">
+            <div class="row">
+              <div class="col-12">
+                <div class="mb-5">
+                  <h3>Log in</h3>
+                </div>
+              </div>
+              
+            </div>
+            <form action="login" >
+              <div class="row gy-3 gy-md-4 overflow-hidden">
+                <div class="col-12">
+                  <label for="username" class="form-label">Nom Utilisateur <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" name="username"  placeholder="example" required>
+                </div>
+                <div class="col-12">
+                  <label for="password" class="form-label">Mot de Passe <span class="text-danger">*</span></label>
+                  <input type="password" class="form-control" name="password"  value="" required>
+                </div>
+                <div class="col-12">
+             <p>Choisissez votre Post  <span class="text-danger">!</span></p>
+			<div><input type="radio" name="userPost" value="Admin" required /> Administrateur</div>
+			<div><input type="radio" name="userPost" value="Directeur" required/> Directeur</div>
+			<div><input type="radio" name="userPost" value="ES" required /> Enseignant</div>	
+                </div>
+                <div class="col-12">
+                  <div class="d-grid">
+                    <button class="btn bsb-btn-xl btn-primary" type="submit">inscrire</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="row">
+              <div class="col-12">
+                <hr class="mt-5 mb-4 border-secondary-subtle">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
