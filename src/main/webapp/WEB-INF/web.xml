@@ -48,7 +48,7 @@
 
 		<init-param>
 			<param-name>jersey.config.server.provider.packages</param-name>
-			<param-value>devoir.projet</param-value>
+			<param-value>devoir</param-value>
 		</init-param>
 
 	</servlet>

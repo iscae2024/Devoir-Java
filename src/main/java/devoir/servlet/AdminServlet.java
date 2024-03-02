@@ -45,6 +45,14 @@ public class AdminServlet extends HttpServlet{
 						+ "  <thead id=headTableEn></thead>");
 				out.println("<tbody id=listEn>");
 				out.println("</tbody></table>");
+//***Form pour changer le mot de passe
+		out.println("<form class=\" mt-5 form-control\" action=Dashboard/AdminResource method=POST >"
+				+ "  <div class=\"form-group\">"
+				+ "    <label>Modifier le Mot de Passe </label>"
+				+ "    <input type=\"text\" class=\"form-control mb-2\"  name=password placeholder=\"Mot de Pass\">"
+				+ "  </div>"
+				+ "  <button type=\"submit\" class=\"btn btn-primary\">Modifier</button>"
+				+ "</form>");
 		out.println("</div>"
 				+ "<script>"
 				+ "async function  getAllCours(){"
@@ -72,9 +80,9 @@ public class AdminServlet extends HttpServlet{
 				+ "document.getElementById('listEn').innerHTML+=tr} );"
 				+ "}"
 				+ "getAllEn() ; getAllDr(); getAllCours();"
-				+ "</script>"
-				+ "</body>\r\n"
-				+ "</html>");
+				+ "</script>");
+	
+		out.println("</body></html>");
 		out.close();
 	}
 	
