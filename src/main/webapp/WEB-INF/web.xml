@@ -40,6 +40,16 @@
 		<url-pattern>/AdminServices</url-pattern>
 </servlet-mapping>
 
+<!-- Ajouter un Creneau AjouterCours-->
+
+<servlet>
+		<servlet-name>Cours</servlet-name>
+		<servlet-class>devoir.servlet.CreneauServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+		<servlet-name>Cours</servlet-name>
+		<url-pattern>/AjouterCours</url-pattern>
+</servlet-mapping>
   
   
 	<servlet>

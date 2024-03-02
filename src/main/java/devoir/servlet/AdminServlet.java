@@ -26,8 +26,9 @@ public class AdminServlet extends HttpServlet{
 				+ "<body>"
 				+ "<nav  class=\"navbar navbar-expand-lg navbar-light bg-light\">"
 				+ " <img src=\"img/logo-iscae.png\" style=\" width:100px;  \" > "
-				+ "<div class=\"container text-center pt-3\"><h2>Admin</h2></div>"
-				+ "</nav>");
+				+ "<div class=\"container text-center d-flex pt-3\"><h2>Admin</h2>"
+				+ "<a class=\"btn btn-primary\" href=\"AjouterCours\">Ajouter un créneau</a>"
+				+ "</div></nav>");
 		
 		out.println("<div class=container>");
 		out.println("<div class=\"form-group\">"

@@ -21,10 +21,16 @@ import jakarta.ws.rs.core.Response;
 @Path("/CoursApi")
 @Produces(MediaType.APPLICATION_JSON)
 public class CoursResource {
-	public Map<Integer, Cours> listCours = new HashMap<Integer, Cours>();
+	public static Map<Integer, Cours> listCours = new HashMap<Integer, Cours>();
+	public static int id = 0;
 	@GET
 	public Map<Integer, Cours> getCourses(){
 		return listCours;
 	}
-		
+	@PUT
+	public void insert(Cours cours) {
+		cours.id = id;
+		listCours.put(id, cours);
+		id++;
+	}
 }
