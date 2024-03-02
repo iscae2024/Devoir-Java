@@ -30,6 +30,13 @@ public class AdminServlet extends HttpServlet{
 				+ "</nav>");
 		
 		out.println("<div class=container>");
+		out.println("<div class=\"form-group\">"
+				+ "    <label>Nom directeur </label>"
+				+ "    <input type=\"text\" class=\"form-control w-25\" id=nameDr />"
+				+ "    <label> Mot de Passe </label>"
+				+ "    <input type=\"text\" class=\"form-control w-25\" id=passwordDr />"
+				+ "  </div>"
+				+ "  <button class=\"btn btn-primary\" onclick=AjouterDr() >Enregistrer</button>");
 //***List de Cours : 
 				out.println("<h2 class=text-center>Liste de Cours</h2><table class=\"table\">"
 						+ "  <thead id=headTableCours></thead>");
@@ -80,6 +87,13 @@ public class AdminServlet extends HttpServlet{
 				+ "document.getElementById('listEn').innerHTML+=tr} );"
 				+ "}"
 				+ "getAllEn() ; getAllDr(); getAllCours();"
+				+ "function AjouterDr(){"
+				+ "var username = document.getElementById('nameDr').value ;"
+				+ "var password = document.getElementById('passwordDr').value ;"
+				+ "fetch('Dashboard/DirecteurApi', {method: 'PUT' ,headers: {'Content-Type': 'application/json'},  body: JSON.stringify({ name : username  , password : password }) }" 
+				+ ");"
+				+ "getAllDr()"
+				+ "}"
 				+ "</script>");
 	
 		out.println("</body></html>");

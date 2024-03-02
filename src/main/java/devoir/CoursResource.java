@@ -21,7 +21,7 @@ import jakarta.ws.rs.core.Response;
 @Path("/CoursApi")
 @Produces(MediaType.APPLICATION_JSON)
 public class CoursResource {
-	public static Map<Integer, Cours> listCours = new HashMap<Integer, Cours>();
+	public Map<Integer, Cours> listCours = new HashMap<Integer, Cours>();
 	@GET
 	public Map<Integer, Cours> getCourses(){
 		return listCours;
