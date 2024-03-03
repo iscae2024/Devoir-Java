@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -40,5 +41,10 @@ public class DirecteurResource {
 	public void update(@FormParam("nameDr") String name,@FormParam("passwordDr") String password, @FormParam("id") int id ) {
 		directeurs.remove(id);
 		directeurs.put(id, new Directeur(name, password , id)); 
+	}
+	
+	@DELETE
+	public void delete(@QueryParam("id") int id) {
+		directeurs.remove(id);
 	}
 }
