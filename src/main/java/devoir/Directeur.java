@@ -12,6 +12,7 @@ public class Directeur {
 	public String password;
 	public Directeur(String name, String password , int id) {
 		this.name = name;
+		this.password = password;
 		this.id = id;
 	}
 	public Directeur() {

@@ -38,7 +38,7 @@ public class AdminServlet extends HttpServlet{
 				+ "    <input type=\"text\" class=\"form-control w-25\" id=passwordDr />"
 				+ "  </div>"
 				+ "  <button class=\"btn btn-primary\" onclick=AjouterDr() >Enregistrer</button>");
-
+//***Form modifier un créneau
 		out.println("<div class=\"form-group\"><form action=Dashboard/CoursApi method=POST>"
 				+ "    <label>Nom Matier </label>"
 				+ "    <input type=\"text\" class=form-control id=nameMatier name=name required/>"
@@ -53,12 +53,21 @@ public class AdminServlet extends HttpServlet{
 				+ "		</select>"
 				+ "	<input type=hidden id=hiddenInput name=id/>"
 				+ " <button type=submit class=\"btn btn-primary mt-2\" onclick=getAllCours() disabled=true id=modifier >Modifier</button>");
-		out.println("</div>");
+		out.println("</form></div>");
 //***List de Cours : 
 				out.println("<h2 class=text-center>Liste de Cours</h2><table class=\"table\">"
 						+ "<thead id=headTableCours></thead>");
 				out.println("<tbody id=listCours>");
 				out.println("</tbody></table>");
+//***
+				out.println("<div class=\"form-group\"><form action=Dashboard/DirecteurApi method=POST>"
+						+ "    <label>Nom</label>"
+						+ "    <input type=\"text\" class=form-control id=NameDr name=nameDr required/>"
+						+ "    <label>Password</label>"
+						+ "    <input type=\"text\" class=form-control id=PasswordDr name=passwordDr required/>"
+						+ "	<input type=hidden id=hiddenInputDr name=id/>"
+						+ " <button type=submit class=\"btn btn-primary mt-2\" onclick=getAllDr() disabled=true id=modifierDr >Modifier</button>");
+				out.println("</form></div>");
 //***List de Directeurs : 
 				out.println("<h2 class=text-center>Liste de directeurs</h2><table class=\"table\">"
 						+ "  <thead id=headTableDr></thead>");
@@ -104,12 +113,22 @@ public class AdminServlet extends HttpServlet{
 				+ "}"
 				+ "async function  getAllDr(){"
 				+ "var cours = await fetch('Dashboard/DirecteurApi',  {method: 'GET' }  ) ;  var result = await cours.json();"
-				+ "document.getElementById('headTableDr').innerHTML='<tr><th>ID</th><th scope=col>NOM</th></tr>';"
+				+ "document.getElementById('headTableDr').innerHTML='<tr><th>ID</th><th scope=col>NOM</th><th></th></tr>';"
 				+ "document.getElementById('listDr').innerHTML='';"
 				+ "; Object.values(result).forEach(values=> {" 
-				+ "var tr = '<tr><td>'+values.id+'</td><td>'+values.name+'</td></tr>';"
+				+ "var tr = '<tr><td>'+values.id+'</td><td>'+values.name+'</td><td><button class=\"btn btn-info\" onclick=modifierDr('+values.id+') >Modifier</button></td></tr>';"
 				+ "document.getElementById('listDr').innerHTML+=tr} );"
 				+ "}"
+				+ "async function modifierDr(id){"
+				+ "var directeur = await fetch('Dashboard/DirecteurApi?id='+id,  {method: 'GET' }  ) ;  var result = await directeur.json();"
+				+ "; Object.values(result).forEach(values=> {" 
+				+ "document.getElementById('NameDr').value =values.name;"
+				+ "document.getElementById('PasswordDr').value = values.password;"
+				+ "document.getElementById('hiddenInputDr').value=id;"
+				+ "document.getElementById('modifierDr').disabled = false"
+				+ "});"
+				+ "}"
+				+ ""
 				+ "async function  getAllEn(){"
 				+ "var cours = await fetch('Dashboard/EnseignantApi',  {method: 'GET' }  ) ;  var result = await cours.json();"
 				+ "document.getElementById('headTableEn').innerHTML='<tr><th>ID</th><th scope=col>NOM</th></tr>';"
