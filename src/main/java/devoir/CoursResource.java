@@ -47,4 +47,8 @@ public class CoursResource {
 		listCours.put(id, new Cours(name, timeSlot, day, id)); 
 	}
 	
+	@DELETE
+	public void delete(@QueryParam("id") int id) {
+		listCours.remove(id);
+	}
 }
