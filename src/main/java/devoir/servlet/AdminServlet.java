@@ -38,9 +38,25 @@ public class AdminServlet extends HttpServlet{
 				+ "    <input type=\"text\" class=\"form-control w-25\" id=passwordDr />"
 				+ "  </div>"
 				+ "  <button class=\"btn btn-primary\" onclick=AjouterDr() >Enregistrer</button>");
+
+		out.println("<div class=\"form-group\"><form action=Dashboard/CoursApi method=POST>"
+				+ "    <label>Nom Matier </label>"
+				+ "    <input type=\"text\" class=form-control id=nameMatier name=name required/>"
+				+ "    <label>Jour</label>"
+				+ "    <input type=\"text\" class=form-control id=jour name=day required/>"
+				+ "		<label>plage horaire</label>"
+				+ "		<select id=timeSlot class=form-control name=timeSlot>"
+				+ "		<option value=8h-10h >8h-10h</option>"
+				+ "		<option value=10h-12h >10h-12h</option>"
+				+ "		<option value=15h-17h >15h-17h</option>"
+				+ "		<option value=17h-19h >17h-19h</option>"
+				+ "		</select>"
+				+ "	<input type=hidden id=hiddenInput name=id/>"
+				+ " <button type=submit class=\"btn btn-primary mt-2\" onclick=getAllCours() disabled=true id=modifier >Modifier</button>");
+		out.println("</div>");
 //***List de Cours : 
 				out.println("<h2 class=text-center>Liste de Cours</h2><table class=\"table\">"
-						+ "  <thead id=headTableCours></thead>");
+						+ "<thead id=headTableCours></thead>");
 				out.println("<tbody id=listCours>");
 				out.println("</tbody></table>");
 //***List de Directeurs : 
@@ -65,11 +81,22 @@ public class AdminServlet extends HttpServlet{
 				+ "<script>"
 				+ "async function  getAllCours(){"
 				+ "var cours = await fetch('Dashboard/CoursApi',  {method: 'GET' }  ) ;  var result = await cours.json();"
-				+ "document.getElementById('headTableCours').innerHTML='<tr><th scope=col>NOM Matier</th><th scope=col>Jours</th><th scope=col>Créneau</th></tr>';"
+				+ "document.getElementById('headTableCours').innerHTML='<tr><th>Nom</th><th>Jour</th><th>Créneau</th><th>Modifier</th></tr>';"
 				+ "document.getElementById('listCours').innerHTML='';"
 				+ "; Object.values(result).forEach(values=> {" 
-				+ "var tr = '<tr><td>'+values.name+'</td><td>'+values.day+'</td><td>'+values.timeSlot+'</td></tr>';"
-				+ "document.getElementById('listCours').innerHTML+=tr} );"
+				+ "var line = '<tr><td>'+ values.name +'</td><td>'+values.day+'</td><td>'+values.timeSlot+'</td><td><button class=\"btn btn-info\" onclick=modifier('+values.id+') >Modifier</button></td></tr>';"
+				+ "document.getElementById('listCours').innerHTML+=line} );"
+				+ "document.getElementById('modifier').disabled = true"
+				+ "};"
+				+ "async function modifier(id){"
+				+ "var cours = await fetch('Dashboard/CoursApi?id='+id,  {method: 'GET' }  ) ;  var result = await cours.json();"
+				+ "; Object.values(result).forEach(values=> {" 
+				+ "document.getElementById('nameMatier').value =values.name;"
+				+ "document.getElementById('jour').value = values.day;"
+				+ "document.getElementById('timeSlot').value = values.timeSlot;"
+				+ "document.getElementById('hiddenInput').value=id;"
+				+ "document.getElementById('modifier').disabled = false"
+				+ "});"
 				+ "}"
 				+ "async function  getAllDr(){"
 				+ "var cours = await fetch('Dashboard/DirecteurApi',  {method: 'GET' }  ) ;  var result = await cours.json();"

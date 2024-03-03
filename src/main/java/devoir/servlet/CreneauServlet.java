@@ -33,7 +33,7 @@ public class CreneauServlet extends HttpServlet{
 				+ "    <input type=\"text\" class=form-control id=jour required/>"
 				+ "		<label>plage horaire</label>"
 				+ "		<select id=timeSlot class=form-control>"
-				+ "		<option value=8h-10 >8h-10h</option>"
+				+ "		<option value=8h-10h >8h-10h</option>"
 				+ "		<option value=10h-12h >10h-12h</option>"
 				+ "		<option value=15h-17h >15h-17h</option>"
 				+ "		<option value=17h-19h >17h-19h</option>"
