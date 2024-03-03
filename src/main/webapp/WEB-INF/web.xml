@@ -50,6 +50,17 @@
 		<servlet-name>Cours</servlet-name>
 		<url-pattern>/AjouterCours</url-pattern>
 </servlet-mapping>
+ <!-- Servlet Directeur --> 
+ <servlet>
+		<servlet-name>PageDr</servlet-name>
+		<servlet-class>devoir.servlet.DirecteurServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+		<servlet-name>PageDr</servlet-name>
+		<url-pattern>/Directeur</url-pattern>
+</servlet-mapping>
+ 
+  
   
   
 	<servlet>

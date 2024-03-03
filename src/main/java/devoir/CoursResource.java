@@ -27,10 +27,24 @@ public class CoursResource {
 	public Map<Integer, Cours> getCourses(){
 		return listCours;
 	}
+	
+	@GET
+	@Path("/Id")
+	public Cours getCoursByID(@QueryParam("Id") int id) {
+		return listCours.get(id);
+	}
 	@PUT
 	public void insert(Cours cours) {
 		cours.id = id;
 		listCours.put(id, cours);
 		id++;
 	}
+	@POST
+	@Consumes({"application/x-www-form-urlencoded"})
+	public void update(@FormParam("name") String name, 
+		@FormParam("timeSlot") String timeSlot ,@FormParam("day") String day, @FormParam("id") int id ) {
+		listCours.remove(id);
+		listCours.put(id, new Cours(name, timeSlot, day, id)); 
+	}
+	
 }
