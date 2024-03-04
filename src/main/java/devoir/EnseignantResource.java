@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -41,5 +42,8 @@ public class EnseignantResource{
 		enseignants.remove(id);
 		enseignants.put(id, new Enseignant(name, password, id)); 
 	}
-	
+	@DELETE
+	public void delete(@QueryParam("id") int id) {
+		enseignants.remove(id);
+	}
 }

@@ -150,7 +150,7 @@ public class AdminServlet extends HttpServlet{
 				+ "document.getElementById('headTableEn').innerHTML='<tr><th>ID</th><th scope=col>NOM</th></tr>';"
 				+ "document.getElementById('listEn').innerHTML='';"
 				+ "; Object.values(result).forEach(values=> {" 
-				+ "var tr = '<tr><td>'+values.id+'</td><td>'+values.name+'</td><td><button class=\"btn btn-primary\" onclick=modifierEn('+values.id+') >Modifier</button></td></tr>';"
+				+ "var tr = '<tr><td>'+values.id+'</td><td>'+values.name+'</td><td><button class=\"btn btn-primary\" onclick=modifierEn('+values.id+') >Modifier</button><button class=\"ml-2 btn btn-danger\" onclick=deleteEn('+values.id+')>Supprimer</button></td></tr>';"
 				+ "document.getElementById('listEn').innerHTML+=tr} );"
 				+ "}"
 				+ "getAllEn() ; getAllDr(); getAllCours();"
@@ -174,6 +174,10 @@ public class AdminServlet extends HttpServlet{
 				+ "document.getElementById('PasswordEn').value = result.password;"
 				+ "document.getElementById('hiddenInputEn').value=id;"
 				+ "document.getElementById('modifierEn').disabled = false"
+				+ "}"
+				+ "function deleteEn(id){"
+				+ "fetch('Dashboard/EnseignantApi?id='+id,{method: 'DELETE'});"
+				+ "getAllEn();"
 				+ "}"
 				+ "</script>");
 		out.println("</body></html>");
