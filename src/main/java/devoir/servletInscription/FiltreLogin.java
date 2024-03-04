@@ -23,6 +23,33 @@ public class FiltreLogin extends HttpFilter implements Filter {
 		if (name.equals(devoir.AdminResource.admin.get(1).name) && pass.equals(devoir.AdminResource.admin.get(1).password) && post.equals("Admin")) {
 			chain.doFilter(request, response);
 		}
+		else if (post.equals("Directeur")) {
+			boolean exist = false;
+			for(devoir.Directeur directeur : devoir.DirecteurResource.directeurs.values() ) {
+				if (directeur.password.equals(pass)) {
+					exist = true;
+				}
+			}
+			if (exist) {
+				chain.doFilter(request, response);
+			}else {
+				RequestDispatcher rd = request.getRequestDispatcher("index.html");  
+				rd.include(request, response);
+			}
+		}else if (post.equals("ES")) {
+			boolean exist = false;
+			for(devoir.Enseignant ens : devoir.EnseignantResource.enseignants.values() ) {
+				if (ens.password.equals(pass)) {
+					exist = true;
+				}
+			}
+			if (exist) {
+				chain.doFilter(request, response);
+			}else {
+				RequestDispatcher rd = request.getRequestDispatcher("index.html");  
+				rd.include(request, response);
+			}
+		}
 		else {
 			RequestDispatcher rd = request.getRequestDispatcher("index.html");  
 			rd.include(request, response);

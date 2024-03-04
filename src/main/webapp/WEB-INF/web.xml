@@ -59,6 +59,15 @@
 		<servlet-name>PageDr</servlet-name>
 		<url-pattern>/Directeur</url-pattern>
 </servlet-mapping>
+ <!-- Servlet Enseignant --> 
+ <servlet>
+		<servlet-name>PageEn</servlet-name>
+		<servlet-class>devoir.servlet.EnseignantServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+		<servlet-name>PageEn</servlet-name>
+		<url-pattern>/Enseignant</url-pattern>
+</servlet-mapping>
  
   
   

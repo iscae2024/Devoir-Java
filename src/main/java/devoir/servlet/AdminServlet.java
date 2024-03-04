@@ -39,7 +39,7 @@ public class AdminServlet extends HttpServlet{
 				+ "    <input type=\"text\" class=\"form-control\" id=passwordDr />"
 				+ "  <button class=\"btn btn-primary\" onclick=AjouterDr() >Enregistrer</button> </div>");
 		out.println("<div class=\"form-group col-5 \">"
-				+ "    <label>Nom directeur </label>"
+				+ "    <label>Nom enseignant </label>"
 				+ "    <input type=\"text\" class=\"form-control\" id=nameEn />"
 				+ "    <label> Mot de Passe </label>"
 				+ "    <input type=\"text\" class=\"form-control\" id=passwordEn />"

@@ -22,6 +22,14 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher rd = req.getRequestDispatcher("/AdminServices");  
 			rd.include(req, rep);
 			}
+		if(req.getParameter("userPost").equals("Directeur")) {
+			RequestDispatcher rd = req.getRequestDispatcher("/Directeur");  
+			rd.include(req, rep);
+		}
+		if (req.getParameter("userPost").equals("ES")) {
+			RequestDispatcher rd = req.getRequestDispatcher("/Enseignant");  
+			rd.include(req, rep);
+		}
 	}
 	
 }
