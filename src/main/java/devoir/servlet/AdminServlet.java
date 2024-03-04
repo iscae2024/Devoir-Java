@@ -31,13 +31,20 @@ public class AdminServlet extends HttpServlet{
 				+ "</div></nav>");
 		
 		out.println("<div class=container>");
-		out.println("<div class=\"form-group\">"
+		out.println("<div class=\"gap-5 row\">");
+		out.println("<div class=\"form-group col-5\">"
 				+ "    <label>Nom directeur </label>"
-				+ "    <input type=\"text\" class=\"form-control w-25\" id=nameDr />"
+				+ "    <input type=\"text\" class=\"form-control\" id=nameDr />"
 				+ "    <label> Mot de Passe </label>"
-				+ "    <input type=\"text\" class=\"form-control w-25\" id=passwordDr />"
-				+ "  </div>"
-				+ "  <button class=\"btn btn-primary\" onclick=AjouterDr() >Enregistrer</button>");
+				+ "    <input type=\"text\" class=\"form-control\" id=passwordDr />"
+				+ "  <button class=\"btn btn-primary\" onclick=AjouterDr() >Enregistrer</button> </div>");
+		out.println("<div class=\"form-group col-5 \">"
+				+ "    <label>Nom directeur </label>"
+				+ "    <input type=\"text\" class=\"form-control\" id=nameEn />"
+				+ "    <label> Mot de Passe </label>"
+				+ "    <input type=\"text\" class=\"form-control\" id=passwordEn />"
+				+ "  <button class=\"btn btn-primary\" onclick=AjouterEn() >Enregistrer</button></div>");
+		out.println("</div>");
 //***Form modifier un créneau
 		out.println("<div class=\"form-group\"><form action=Dashboard/CoursApi method=POST>"
 				+ "    <label>Nom Matier </label>"
@@ -148,6 +155,13 @@ public class AdminServlet extends HttpServlet{
 				+ "fetch('Dashboard/DirecteurApi', {method: 'PUT' ,headers: {'Content-Type': 'application/json'},  body: JSON.stringify({ name : username  , password : password }) }" 
 				+ ");"
 				+ "getAllDr()"
+				+ "}"
+				+ "function AjouterEn(){"
+				+ "var username = document.getElementById('nameEn').value ;"
+				+ "var password = document.getElementById('passwordEn').value ;"
+				+ "fetch('Dashboard/EnseignantApi', {method: 'PUT' ,headers: {'Content-Type': 'application/json'},  body: JSON.stringify({ name : username  , password : password }) }" 
+				+ ");"
+				+ "getAllEn()"
 				+ "}"
 				+ "</script>");
 	
