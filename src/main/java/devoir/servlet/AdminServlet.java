@@ -58,7 +58,7 @@ public class AdminServlet extends HttpServlet{
 				+ "		<option value=15h-17h >15h-17h</option>"
 				+ "		<option value=17h-19h >17h-19h</option>"
 				+ "		</select>"
-				+ "	<input type=hidden id=hiddenInput name=id/>"
+				+ "	<input type=hidden id=hiddenInput name=id />"
 				+ " <button type=submit class=\"btn btn-primary mt-2\" onclick=getAllCours() disabled=true id=modifier >Modifier</button>");
 		out.println("</form></div>");
 //***List de Cours : 
@@ -72,7 +72,7 @@ public class AdminServlet extends HttpServlet{
 						+ "    <input type=\"text\" class=form-control id=NameDr name=nameDr required/>"
 						+ "    <label>Password</label>"
 						+ "    <input type=\"text\" class=form-control id=PasswordDr name=passwordDr required/>"
-						+ "	<input type=hidden id=hiddenInputDr name=id/>"
+						+ "	<input type=hidden id=hiddenInputDr name=id />"
 						+ " <button type=submit class=\"btn btn-primary mt-2\" onclick=getAllDr() disabled=true id=modifierDr >Modifier</button>");
 				out.println("</form></div>");
 //***List de Directeurs : 
@@ -80,6 +80,15 @@ public class AdminServlet extends HttpServlet{
 						+ "  <thead id=headTableDr></thead>");
 				out.println("<tbody id=listDr>");
 				out.println("</tbody></table>");
+//***
+				out.println("<div class=\"form-group\"><form action=Dashboard/EnseignantApi method=POST>"
+						+ "    <label>Nom</label>"
+						+ "    <input type=\"text\" class=form-control id=NameEn name=nameEn required/>"
+						+ "    <label>Password</label>"
+						+ "    <input type=\"text\" class=form-control id=PasswordEn name=passwordEn required/>"
+						+ "	<input type=hidden id=hiddenInputEn name=id />"
+						+ " <button type=submit class=\"btn btn-primary mt-2\" onclick=getAllEn() disabled=true id=modifierEn >Modifier</button>");
+				out.println("</form></div>");
 //***List de Enseignants: 
 				out.println("<h2 class=text-center>Liste de enseignants</h2><table class=\"table\">"
 						+ "  <thead id=headTableEn></thead>");
@@ -99,20 +108,18 @@ public class AdminServlet extends HttpServlet{
 				+ "var cours = await fetch('Dashboard/CoursApi',  {method: 'GET' }  ) ;  var result = await cours.json();"
 				+ "document.getElementById('headTableCours').innerHTML='<tr><th>Nom</th><th>Jour</th><th>Créneau</th><th>Modifier</th></tr>';"
 				+ "document.getElementById('listCours').innerHTML='';"
-				+ "; Object.values(result).forEach(values=> {" 
+				+ "; Object.values(result).forEach( values => {" 
 				+ "var line = '<tr><td>'+ values.name +'</td><td>'+values.day+'</td><td>'+values.timeSlot+'</td><td><button class=\"btn btn-info\" onclick=modifier('+values.id+') >Modifier</button><button class=\"btn btn-danger\" onclick=deletCours('+values.id+')>Supprimer</button></td></tr>';"
 				+ "document.getElementById('listCours').innerHTML+=line} );"
 				+ "document.getElementById('modifier').disabled = true"
 				+ "};"
 				+ "async function modifier(id){"
-				+ "var cours = await fetch('Dashboard/CoursApi?id='+id,  {method: 'GET' }  ) ;  var result = await cours.json();"
-				+ "; Object.values(result).forEach(values=> {" 
-				+ "document.getElementById('nameMatier').value =values.name;"
-				+ "document.getElementById('jour').value = values.day;"
-				+ "document.getElementById('timeSlot').value = values.timeSlot;"
+				+ "var cours = await fetch('Dashboard/CoursApi/Id?id='+id,  {method: 'GET' }  ) ;  var result = await cours.json();"
+				+ "document.getElementById('nameMatier').value =result.name;"
+				+ "document.getElementById('jour').value = result.day;"
+				+ "document.getElementById('timeSlot').value = result.timeSlot;"
 				+ "document.getElementById('hiddenInput').value=id;"
-				+ "document.getElementById('modifier').disabled = false"
-				+ "});"
+				+ "document.getElementById('modifier').disabled = false;"
 				+ "}"
 				+ "function deletCours(id){"
 				+ "fetch('Dashboard/CoursApi?id='+id,{method: 'DELETE'});"
@@ -127,13 +134,11 @@ public class AdminServlet extends HttpServlet{
 				+ "document.getElementById('listDr').innerHTML+=tr} );"
 				+ "}"
 				+ "async function modifierDr(id){"
-				+ "var directeur = await fetch('Dashboard/DirecteurApi?id='+id,  {method: 'GET' }  ) ;  var result = await directeur.json();"
-				+ "; Object.values(result).forEach(values=> {" 
-				+ "document.getElementById('NameDr').value =values.name;"
-				+ "document.getElementById('PasswordDr').value = values.password;"
+				+ "var directeur = await fetch('Dashboard/DirecteurApi/id?id='+id,  {method: 'GET' }  ) ;  var result = await directeur.json();"
+				+ "document.getElementById('NameDr').value =result.name;"
+				+ "document.getElementById('PasswordDr').value = result.password;"
 				+ "document.getElementById('hiddenInputDr').value=id;"
-				+ "document.getElementById('modifierDr').disabled = false"
-				+ "});"
+				+ "document.getElementById('modifierDr').disabled = false;"
 				+ "}"
 				+ "function deleteDr(id){"
 				+ "fetch('Dashboard/DirecteurApi?id='+id,{method: 'DELETE'});"
@@ -145,7 +150,7 @@ public class AdminServlet extends HttpServlet{
 				+ "document.getElementById('headTableEn').innerHTML='<tr><th>ID</th><th scope=col>NOM</th></tr>';"
 				+ "document.getElementById('listEn').innerHTML='';"
 				+ "; Object.values(result).forEach(values=> {" 
-				+ "var tr = '<tr><td>'+values.id+'</td><td>'+values.name+'</td></tr>';"
+				+ "var tr = '<tr><td>'+values.id+'</td><td>'+values.name+'</td><td><button class=\"btn btn-primary\" onclick=modifierEn('+values.id+') >Modifier</button></td></tr>';"
 				+ "document.getElementById('listEn').innerHTML+=tr} );"
 				+ "}"
 				+ "getAllEn() ; getAllDr(); getAllCours();"
@@ -163,8 +168,14 @@ public class AdminServlet extends HttpServlet{
 				+ ");"
 				+ "getAllEn()"
 				+ "}"
+				+ "async function modifierEn(id){"
+				+ "var ens = await fetch('Dashboard/EnseignantApi/id?id='+id,  {method: 'GET' }  ) ;  var result = await ens.json();"
+				+ "document.getElementById('NameEn').value =result.name;"
+				+ "document.getElementById('PasswordEn').value = result.password;"
+				+ "document.getElementById('hiddenInputEn').value=id;"
+				+ "document.getElementById('modifierEn').disabled = false"
+				+ "}"
 				+ "</script>");
-	
 		out.println("</body></html>");
 		out.close();
 	}
